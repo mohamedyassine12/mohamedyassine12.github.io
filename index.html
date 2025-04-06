@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <title>Résumé des commandes Docker</title>
+    <style>
+        /* Styles généraux */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            background: #f4f4f4;
+        }
+        header, footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1rem 0;
+        }
+        main {
+            max-width: 960px;
+            margin: 2rem auto;
+            padding: 1rem;
+            background: #fff;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2, h3 {
+            color: #333;
+            margin-top: 0;
+        }
+        p {
+            margin-bottom: 1rem;
+        }
+
+        /* Styles pour le tableau */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        th, td {
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            vertical-align: middle;
+        }
+        th {
+            background: #f0f0f0;
+            text-align: left;
+        }
+        tr:nth-child(even) {
+            background: #fafafa;
+        }
+
+        /* Styles pour le code */
+        code, pre {
+            background: #eee;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: "Courier New", Courier, monospace;
+        }
+        pre {
+            padding: 1rem;
+            overflow-x: auto;
+        }
+        .command {
+            color: #007acc;
+            font-weight: bold;
+        }
+        .argument {
+            color: #d14;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Résumé des commandes Docker</h1>
+    </header>
+
+    <main>
+        <section>
+            <h2>Commandes de base</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Commande</th>
+                        <th>Description</th>
+                        <th>Exemple</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code class="command">docker run</code></td>
+                        <td>Lance un conteneur à partir d’une image</td>
+                        <td>
+                            <code>docker run -it <span class="argument">ubuntu</span> /bin/bash</code><br/>
+                            <em>Crée et démarre un conteneur interactif avec Ubuntu</em>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code class="command">docker ps</code></td>
+                        <td>Liste les conteneurs en cours d’exécution</td>
+                        <td>
+                            <code>docker ps</code><br/>
+                            <em>Affiche tous les conteneurs actifs</em>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code class="command">docker ps -a</code></td>
+                        <td>Liste tous les conteneurs (actifs et stoppés)</td>
+                        <td>
+                            <code>docker ps -a</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code class="command">docker stop</code></td>
+                        <td>Arrête un conteneur en cours d’exécution</td>
+                        <td>
+                            <code>docker stop <span class="argument">CONTAINER_ID</span></code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code class="command">docker rm</code></td>
+                        <td>Supprime un conteneur stoppé</td>
+                        <td>
+                            <code>docker rm <span class="argument">CONTAINER_ID</span></code>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <h2>Gestion des images</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Commande</th>
+                        <th>Description</th>
+                        <th>Exemple</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code class="command">docker images</code></td>
+                        <td>Liste les images disponibles localement</td>
+                        <td>
+                            <code>docker images</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code class="command">docker pull</code></td>
+                        <td>Télécharge une image depuis Docker Hub (ou un registry privé)</td>
+                        <td>
+                            <code>docker pull <span class="argument">ubuntu</span></code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code class="command">docker rmi</code></td>
+                        <td>Supprime une image locale</td>
+                        <td>
+                            <code>docker rmi <span class="argument">IMAGE_ID</span></code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code class="command">docker build</code></td>
+                        <td>Construit une image à partir d’un Dockerfile</td>
+                        <td>
+                            <code>docker build -t <span class="argument">mon-image</span> .</code>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <h2>Logs et monitoring</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Commande</th>
+                        <th>Description</th>
+                        <th>Exemple</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code class="command">docker logs</code></td>
+                        <td>Affiche les logs d’un conteneur</td>
+                        <td>
+                            <code>docker logs <span class="argument">CONTAINER_ID</span></code><br/>
+                            <em>--follow pour suivre en temps réel</em>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code class="command">docker top</code></td>
+                        <td>Montre les processus tournant dans un conteneur</td>
+                        <td>
+                            <code>docker top <span class="argument">CONTAINER_ID</span></code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code class="command">docker stats</code></td>
+                        <td>Monitore en temps réel l’utilisation des ressources par les conteneurs</td>
+                        <td>
+                            <code>docker stats</code>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <h2>Exécution et gestion avancée</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Commande</th>
+                        <th>Description</th>
+                        <th>Exemple</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code class="command">docker exec</code></td>
+                        <td>Exécute une commande à l’intérieur d’un conteneur en cours d’exécution</td>
+                        <td>
+                            <code>docker exec -it <span class="argument">CONTAINER_ID</span> /bin/bash</code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code class="command">docker start</code></td>
+                        <td>Redémarre un conteneur précédemment stoppé</td>
+                        <td>
+                            <code>docker start <span class="argument">CONTAINER_ID</span></code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code class="command">docker network</code></td>
+                        <td>Gère les réseaux Docker (création, suppression, inspection)</td>
+                        <td>
+                            <code>docker network create <span class="argument">mon-reseau</span></code><br/>
+                            <em>Crée un nouveau réseau</em>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <h2>Exemple de Dockerfile</h2>
+            <p>Voici un exemple rapide d’un <code>Dockerfile</code> pour une image Node.js :</p>
+            <pre>
+FROM node:14-alpine
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+EXPOSE 3000
+CMD ["npm", "start"]
+            </pre>
+        </section>
+
+        <section>
+            <h2>Ressources utiles</h2>
+            <ul>
+                <li><a href="https://docs.docker.com/" target="_blank" rel="noopener">Documentation officielle Docker</a></li>
+                <li><a href="https://hub.docker.com/" target="_blank" rel="noopener">Docker Hub</a></li>
+                <li><a href="https://docs.docker.com/engine/reference/commandline/docker/" target="_blank" rel="noopener">
+                    Référence officielle de la CLI Docker</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 - Résumé des commandes Docker</p>
+    </footer>
+
+</body>
+</html>
