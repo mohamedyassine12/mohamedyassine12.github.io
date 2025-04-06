@@ -1,282 +1,509 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8" />
-    <title>Résumé des commandes Docker</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commandes Docker Essentielles</title>
     <style>
-        /* Styles généraux */
         body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            background: #f4f4f4;
-        }
-        header, footer {
-            background: #333;
-            color: #fff;
-            text-align: center;
-            padding: 1rem 0;
-        }
-        main {
-            max-width: 960px;
-            margin: 2rem auto;
-            padding: 1rem;
-            background: #fff;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-        }
-        h1, h2, h3 {
             color: #333;
-            margin-top: 0;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
         }
-        p {
-            margin-bottom: 1rem;
+        header {
+            background-color: #0db7ed;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px;
+            margin-bottom: 30px;
         }
-
-        /* Styles pour le tableau */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1rem 0;
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
         }
-        th, td {
-            padding: 0.75rem;
-            border: 1px solid #ddd;
-            vertical-align: middle;
+        h2 {
+            color: #0db7ed;
+            border-bottom: 2px solid #0db7ed;
+            padding-bottom: 10px;
+            margin-top: 40px;
         }
-        th {
-            background: #f0f0f0;
-            text-align: left;
-        }
-        tr:nth-child(even) {
-            background: #fafafa;
-        }
-
-        /* Styles pour le code */
-        code, pre {
-            background: #eee;
-            padding: 0.2rem 0.4rem;
-            border-radius: 4px;
-            font-family: "Courier New", Courier, monospace;
+        .code-container {
+            position: relative;
+            margin-bottom: 15px;
         }
         pre {
-            padding: 1rem;
+            background-color: #f0f8ff;
+            border-left: 4px solid #0db7ed;
+            padding: 15px;
+            border-radius: 0 5px 5px 0;
             overflow-x: auto;
+            margin: 0;
+            font-family: 'Courier New', Courier, monospace;
         }
-        .command {
-            color: #007acc;
-            font-weight: bold;
+        code {
+            color: #333;
+            display: block;
         }
-        .argument {
-            color: #d14;
-            font-style: italic;
+        .comment {
+            color: #6a9955;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: #0db7ed;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: background-color 0.3s;
+        }
+        .copy-btn:hover {
+            background-color: #0a8bba;
+        }
+        .section {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            color: #666;
+            font-size: 0.9em;
         }
     </style>
 </head>
 <body>
-
     <header>
-        <h1>Résumé des commandes Docker</h1>
+        <h1>Commandes Docker Essentielles</h1>
     </header>
 
-    <main>
-        <section>
-            <h2>Commandes de base</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Commande</th>
-                        <th>Description</th>
-                        <th>Exemple</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><code class="command">docker run</code></td>
-                        <td>Lance un conteneur à partir d’une image</td>
-                        <td>
-                            <code>docker run -it <span class="argument">ubuntu</span> /bin/bash</code><br/>
-                            <em>Crée et démarre un conteneur interactif avec Ubuntu</em>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><code class="command">docker ps</code></td>
-                        <td>Liste les conteneurs en cours d’exécution</td>
-                        <td>
-                            <code>docker ps</code><br/>
-                            <em>Affiche tous les conteneurs actifs</em>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><code class="command">docker ps -a</code></td>
-                        <td>Liste tous les conteneurs (actifs et stoppés)</td>
-                        <td>
-                            <code>docker ps -a</code>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><code class="command">docker stop</code></td>
-                        <td>Arrête un conteneur en cours d’exécution</td>
-                        <td>
-                            <code>docker stop <span class="argument">CONTAINER_ID</span></code>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><code class="command">docker rm</code></td>
-                        <td>Supprime un conteneur stoppé</td>
-                        <td>
-                            <code>docker rm <span class="argument">CONTAINER_ID</span></code>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
+    <div class="section">
+        <h2>Gestion des images</h2>
+        
+        <div class="code-container">
+            <button class="copy-btn">Copier</button>
+            <pre><code><span class="comment"># Télécharger une image depuis Docker Hub</span>
+docker pull &lt;nom_image&gt;:&lt;tag&gt;</code></pre>
+        </div>
 
-        <section>
-            <h2>Gestion des images</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Commande</th>
-                        <th>Description</th>
-                        <th>Exemple</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><code class="command">docker images</code></td>
-                        <td>Liste les images disponibles localement</td>
-                        <td>
-                            <code>docker images</code>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><code class="command">docker pull</code></td>
-                        <td>Télécharge une image depuis Docker Hub (ou un registry privé)</td>
-                        <td>
-                            <code>docker pull <span class="argument">ubuntu</span></code>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><code class="command">docker rmi</code></td>
-                        <td>Supprime une image locale</td>
-                        <td>
-                            <code>docker rmi <span class="argument">IMAGE_ID</span></code>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><code class="command">docker build</code></td>
-                        <td>Construit une image à partir d’un Dockerfile</td>
-                        <td>
-                            <code>docker build -t <span class="argument">mon-image</span> .</code>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
+        <div class="code-container">
+            <button class="copy-btn">Copier</button>
+            <pre><code><span class="comment"># Lister les images disponibles localement</span>
+docker images</code></pre>
+        </div>
 
-        <section>
-            <h2>Logs et monitoring</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Commande</th>
-                        <th>Description</th>
-                        <th>Exemple</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><code class="command">docker logs</code></td>
-                        <td>Affiche les logs d’un conteneur</td>
-                        <td>
-                            <code>docker logs <span class="argument">CONTAINER_ID</span></code><br/>
-                            <em>--follow pour suivre en temps réel</em>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><code class="command">docker top</code></td>
-                        <td>Montre les processus tournant dans un conteneur</td>
-                        <td>
-                            <code>docker top <span class="argument">CONTAINER_ID</span></code>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><code class="command">docker stats</code></td>
-                        <td>Monitore en temps réel l’utilisation des ressources par les conteneurs</td>
-                        <td>
-                            <code>docker stats</code>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
+        <div class="code-container">
+            <button class="copy-btn">Copier</button>
+            <pre><code><span class="comment"># Construire une image à partir d'un Dockerfile</span>
+docker build -t &lt;nom_image&gt;:&lt;tag&gt; &lt;chemin_dockerfile&gt;</code></pre>
+        </div>
 
-        <section>
-            <h2>Exécution et gestion avancée</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Commande</th>
-                        <th>Description</th>
-                        <th>Exemple</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><code class="command">docker exec</code></td>
-                        <td>Exécute une commande à l’intérieur d’un conteneur en cours d’exécution</td>
-                        <td>
-                            <code>docker exec -it <span class="argument">CONTAINER_ID</span> /bin/bash</code>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><code class="command">docker start</code></td>
-                        <td>Redémarre un conteneur précédemment stoppé</td>
-                        <td>
-                            <code>docker start <span class="argument">CONTAINER_ID</span></code>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><code class="command">docker network</code></td>
-                        <td>Gère les réseaux Docker (création, suppression, inspection)</td>
-                        <td>
-                            <code>docker network create <span class="argument">mon-reseau</span></code><br/>
-                            <em>Crée un nouveau réseau</em>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
+        <div class="code-container">
+            <button class="copy-btn">Copier</button>
+            <pre><code><span class="comment"># Supprimer une image</span>
+docker rmi &lt;nom_image&gt;:&lt;tag&gt;</code></pre>
+        </div>
 
-        <section>
-            <h2>Exemple de Dockerfile</h2>
-            <p>Voici un exemple rapide d’un <code>Dockerfile</code> pour une image Node.js :</p>
-            <pre>
-FROM node:14-alpine
-WORKDIR /app
-COPY package*.json ./
-RUN npm install
-COPY . .
-EXPOSE 3000
-CMD ["npm", "start"]
-            </pre>
-        </section>
+        <div class="code-container">
+            <button class="copy-btn">Copier</button>
+            <pre><code><span class="comment"># Nettoyer les images non utilisées</span>
+docker image prune</code></pre>
+        </div>
 
-        <section>
-            <h2>Ressources utiles</h2>
-            <ul>
-                <li><a href="https://docs.docker.com/" target="_blank" rel="noopener">Documentation officielle Docker</a></li>
-                <li><a href="https://hub.docker.com/" target="_blank" rel="noopener">Docker Hub</a></li>
-                <li><a href="https://docs.docker.com/engine/reference/commandline/docker/" target="_blank" rel="noopener">
-                    Référence officielle de la CLI Docker</a></li>
-            </ul>
-        </section>
-    </main>
+        <div class="code-container">
+            <button class="copy-btn">Copier</button>
+            <pre><code><span class="comment"># Inspecter une image</span>
+docker image inspect &lt;nom_image&gt;:&lt;tag&gt;</code></pre>
+        </div>
+
+        <div class="code-container">
+            <button class="copy-btn">Copier</button>
+            <pre><code><span class="comment"># Pousser une image vers un registry</span>
+docker push &lt;nom_image&gt;:&lt;tag&gt;</code></pre>
+        </div>
+
+        <div class="code-container">
+            <button class="copy-btn">Copier</button>
+            <pre><code><span class="comment"># Sauvegarder une image dans un fichier tar</span>
+docker save -o &lt;fichier_sortie&gt;.tar &lt;nom_image&gt;:&lt;tag&gt;</code></pre>
+        </div>
+
+        <div class="code-container">
+            <button class="copy-btn">Copier</button>
+            <pre><code><span class="comment"># Charger une image depuis un fichier tar</span>
+docker load -i &lt;fichier_entree&gt;.tar</code></pre>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Gestion des conteneurs</h2>
+        
+        <div class="code-container">
+            <button class="copy-btn">Copier</button>
+            <pre><code><span class="comment"># Créer et démarrer un conteneur</span>
+docker run &lt;options&gt; &lt;nom_image&gt;:&lt;tag&gt;</code></pre>
+        </div>
+
+        <div class="code-container">
+            <button class="copy-btn">Copier</button>
+            <pre><code><span class="comment"># Options courantes pour docker run</span>
+<span class="comment">#   -d : Exécuter en arrière-plan (mode détaché)</span>
+<span class="comment">#   -p &lt;port_hote&gt;:&lt;port_conteneur&gt; : Mapper un port</span>
+<span class="comment">#   -v &lt;volume_hote&gt;:&lt;volume_conteneur&gt; : Monter un volume</span>
+<span class="comment">#   --name &lt;nom&gt; : Donner un nom au conteneur</span>
+<span class="comment">#   --rm : Supprimer automatiquement le conteneur à l'arrêt</span>
+<span class="comment">#   -e &lt;VAR&gt;=&lt;valeur&gt; : Définir une variable d'environnement</span></code></pre>
+        </div>
+
+        <div class="code-container">
+            <button class="copy-btn">Copier</button>
+            <pre><code><span class="comment"># Lister les conteneurs en cours d'exécution</span>
+docker ps</code></pre>
+        </div>
+
+        <div class="code-container">
+            <button class="copy-btn">Copier</button>
+            <pre><code><span class="comment"># Lister tous les conteneurs (y compris ceux arrêtés)</span>
+docker ps -a</code></pre>
+        </div>
+
+        <div class="code-container">
+            <button class="copy-btn">Copier</button>
+            <pre><code><span class="comment"># Démarrer un conteneur arrêté</span>
+docker start &lt;id_conteneur|nom_conteneur&gt;</code></pre>
+        </div>
+
+        <div class="code-container">
+            <button class="copy-btn">Copier</button>
+            <pre><code><span class="comment"># Arrêter un conteneur</span>
+docker stop &lt;id_conteneur|nom_conteneur&gt;</code></pre>
+        </div>
+
+        <div class="code-container">
+            <button class="copy-btn">Copier</button>
+            <pre><code><span class="comment"># Redémarrer un conteneur</span>
+docker restart &lt;id_conteneur|nom_conteneur&gt;</code></pre>
+        </div>
+
+        <div class="code-container">
+            <button class="copy-btn">Copier</button>
+            <pre><code><span class="comment"># Supprimer un conteneur</span>
+docker rm &lt;id_conteneur|nom_conteneur&gt;</code></pre>
+        </div>
+
+        <div class="code-container">
+            <button class="copy-btn">Copier</button>
+            <pre><code><span class="comment"># Exécuter une commande dans un conteneur en cours d'exécution</span>
+docker exec -it &lt;id_conteneur|nom_conteneur&gt; &lt;commande&gt;</code></pre>
+        </div>
+
+        <div class="code-container">
+            <button class="copy-btn">Copier</button>
+            <pre><code><span class="comment"># Accéder au shell d'un conteneur</span>
+docker exec -it &lt;id_conteneur|nom_conteneur&gt; /bin/bash</code></pre>
+        </div>
+
+        <div class="code-container">
+            <button class="copy-btn">Copier</button>
+            <pre><code><span class="comment"># Voir les logs d'un conteneur</span>
+docker logs &lt;id_conteneur|nom_conteneur&gt;</code></pre>
+        </div>
+
+        <div class="code-container">
+            <button class="copy-btn">Copier</button>
+            <pre><code><span class="comment"># Suivre les logs en temps réel</span>
+docker logs -f &lt;id_conteneur|nom_conteneur&gt;</code></pre>
+        </div>
+
+        <div class="code-container">
+            <button class="copy-btn">Copier</button>
+            <pre><code><span class="comment"># Inspecter un conteneur</span>
+docker inspect &lt;id_conteneur|nom_conteneur&gt;</code></pre>
+        </div>
+
+        <div class="code-container">
+            <button class="copy-btn">Copier</button>
+            <pre><code><span class="comment"># Voir les statistiques d'utilisation des ressources</span>
+docker stats &lt;id_conteneur|nom_conteneur&gt;</code></pre>
+        </div>
+
+        <div class="code-container">
+            <button class="copy-btn">Copier</button>
+            <pre><code><span class="comment"># Copier des fichiers entre l'hôte et le conteneur</span>
+docker cp &lt;chemin_source&gt; &lt;id_conteneur|nom_conteneur&gt;:&lt;chemin_destination&gt;
+docker cp &lt;id_conteneur|nom_conteneur&gt;:&lt;chemin_source&gt; &lt;chemin_destination&gt;</code></pre>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Gestion des volumes</h2>
+        
+        <div class="code-container">
+            <button class="copy-btn">Copier</button>
+            <pre><code><span class="comment"># Créer un volume</span>
+docker volume create &lt;nom_volume&gt;</code></pre>
+        </div>
+
+        <div class="code-container">
+            <button class="copy-btn">Copier</button>
+            <pre><code><span class="comment"># Lister les volumes</span>
+docker volume ls</code></pre>
+        </div>
+
+        <div class="code-container">
+            <button class="copy-btn">Copier</button>
+            <pre><code><span class="comment"># Inspecter un volume</span>
+docker volume inspect &lt;nom_volume&gt;</code></pre>
+        </div>
+
+        <div class="code-container">
+            <button class="copy-btn">Copier</button>
+            <pre><code><span class="comment"># Supprimer un volume</span>
+docker volume rm &lt;nom_volume&gt;</code></pre>
+        </div>
+
+        <div class="code-container">
+            <button class="copy-btn">Copier</button>
+            <pre><code><span class="comment"># Nettoyer les volumes non utilisés</span>
+docker volume prune</code></pre>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Gestion des réseaux</h2>
+        
+        <div class="code-container">
+            <button class="copy-btn">Copier</button>
+            <pre><code><span class="comment"># Créer un réseau</span>
+docker network create &lt;options&gt; &lt;nom_reseau&gt;</code></pre>
+        </div>
+
+        <div class="code-container">
+            <button class="copy-btn">Copier</button>
+            <pre><code><span class="comment"># Lister les réseaux</span>
+docker network ls</code></pre>
+        </div>
+
+        <div class="code-container">
+            <button class="copy-btn">Copier</button>
+            <pre><code><span class="comment"># Inspecter un réseau</span>
+docker network inspect &lt;nom_reseau&gt;</code></pre>
+        </div>
+
+        <div class="code-container">
+            <button class="copy-btn">Copier</button>
+            <pre><code><span class="comment"># Connecter un conteneur à un réseau</span>
+docker network connect &lt;nom_reseau&gt; &lt;id_conteneur|nom_conteneur&gt;</code></pre>
+        </div>
+
+        <div class="code-container">
+            <button class="copy-btn">Copier</button>
+            <pre><code><span class="comment"># Déconnecter un conteneur d'un réseau</span>
+docker network disconnect &lt;nom_reseau&gt; &lt;id_conteneur|nom_conteneur&gt;</code></pre>
+        </div>
+
+        <div class="code-container">
+            <button class="copy-btn">Copier</button>
+            <pre><code><span class="comment"># Supprimer un réseau</span>
+docker network rm &lt;nom_reseau&gt;</code></pre>
+        </div>
+
+        <div class="code-container">
+            <button class="copy-btn">Copier</button>
+            <pre><code><span class="comment"># Nettoyer les réseaux non utilisés</span>
+docker network prune</code></pre>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Docker Compose</h2>
+        
+        <div class="code-container">
+            <button class="copy-btn">Copier</button>
+            <pre><code><span class="comment"># Démarrer les services définis dans docker-compose.yml</span>
+docker-compose up</code></pre>
+        </div>
+
+        <div class="code-container">
+            <button class="copy-btn">Copier</button>
+            <pre><code><span class="comment"># Démarrer les services en arrière-plan</span>
+docker-compose up -d</code></pre>
+        </div>
+
+        <div class="code-container">
+            <button class="copy-btn">Copier</button>
+            <pre><code><span class="comment"># Arrêter les services</span>
+docker-compose down</code></pre>
+        </div>
+
+        <div class="code-container">
+            <button class="copy-btn">Copier</button>
+            <pre><code><span class="comment"># Arrêter les services et supprimer les volumes</span>
+docker-compose down -v</code></pre>
+        </div>
+
+        <div class="code-container">
+            <button class="copy-btn">Copier</button>
+            <pre><code><span class="comment"># Voir les logs des services</span>
+docker-compose logs</code></pre>
+        </div>
+
+        <div class="code-container">
+            <button class="copy-btn">Copier</button>
+            <pre><code><span class="comment"># Suivre les logs en temps réel</span>
+docker-compose logs -f</code></pre>
+        </div>
+
+        <div class="code-container">
+            <button class="copy-btn">Copier</button>
+            <pre><code><span class="comment"># Exécuter une commande dans un service</span>
+docker-compose exec &lt;service&gt; &lt;commande&gt;</code></pre>
+        </div>
+
+        <div class="code-container">
+            <button class="copy-btn">Copier</button>
+            <pre><code><span class="comment"># Voir l'état des services</span>
+docker-compose ps</code></pre>
+        </div>
+
+        <div class="code-container">
+            <button class="copy-btn">Copier</button>
+            <pre><code><span class="comment"># Reconstruire les images des services</span>
+docker-compose build</code></pre>
+        </div>
+
+        <div class="code-container">
+            <button class="copy-btn">Copier</button>
+            <pre><code><span class="comment"># Démarrer un service spécifique</span>
+docker-compose up &lt;service&gt;</code></pre>
+        </div>
+
+        <div class="code-container">
+            <button class="copy-btn">Copier</button>
+            <pre><code><span class="comment"># Mettre à l'échelle un service</span>
+docker-compose up -d --scale &lt;service&gt;=&lt;nombre_instances&gt;</code></pre>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Informations système</h2>
+        
+        <div class="code-container">
+            <button class="copy-btn">Copier</button>
+            <pre><code><span class="comment"># Afficher les informations système Docker</span>
+docker info</code></pre>
+        </div>
+
+        <div class="code-container">
+            <button class="copy-btn">Copier</button>
+            <pre><code><span class="comment"># Afficher la version de Docker</span>
+docker version</code></pre>
+        </div>
+
+        <div class="code-container">
+            <button class="copy-btn">Copier</button>
+            <pre><code><span class="comment"># Vérifier l'état du daemon Docker</span>
+docker system info</code></pre>
+        </div>
+
+        <div class="code-container">
+            <button class="copy-btn">Copier</button>
+            <pre><code><span class="comment"># Afficher l'utilisation des ressources</span>
+docker system df</code></pre>
+        </div>
+
+        <div class="code-container">
+            <button class="copy-btn">Copier</button>
+            <pre><code><span class="comment"># Nettoyer les ressources non utilisées (images, conteneurs, volumes, réseaux)</span>
+docker system prune</code></pre>
+        </div>
+
+        <div class="code-container">
+            <button class="copy-btn">Copier</button>
+            <pre><code><span class="comment"># Nettoyer tout, y compris les volumes non utilisés</span>
+docker system prune -a --volumes</code></pre>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Sécurité</h2>
+        
+        <div class="code-container">
+            <button class="copy-btn">Copier</button>
+            <pre><code><span class="comment"># Scanner une image pour les vulnérabilités (nécessite Docker Desktop)</span>
+docker scan &lt;nom_image&gt;:&lt;tag&gt;</code></pre>
+        </div>
+
+        <div class="code-container">
+            <button class="copy-btn">Copier</button>
+            <pre><code><span class="comment"># Vérifier les autorisations d'un conteneur</span>
+docker exec &lt;id_conteneur|nom_conteneur&gt; ls -la /path/to/check</code></pre>
+        </div>
+
+        <div class="code-container">
+            <button class="copy-btn">Copier</button>
+            <pre><code><span class="comment"># Exécuter un conteneur en mode privilégié (à éviter en production)</span>
+docker run --privileged &lt;nom_image&gt;:&lt;tag&gt;</code></pre>
+        </div>
+
+        <div class="code-container">
+            <button class="copy-btn">Copier</button>
+            <pre><code><span class="comment"># Limiter les ressources CPU d'un conteneur</span>
+docker run --cpus=".5" &lt;nom_image&gt;:&lt;tag&gt;</code></pre>
+        </div>
+
+        <div class="code-container">
+            <button class="copy-btn">Copier</button>
+            <pre><code><span class="comment"># Limiter la mémoire d'un conteneur</span>
+docker run --memory="512m" &lt;nom_image&gt;:&lt;tag&gt;</code></pre>
+        </div>
+    </div>
 
     <footer>
-        <p>&copy; 2025 - Résumé des commandes Docker</p>
+        <p>Document créé pour référence rapide des commandes Docker</p>
     </footer>
 
+    <script>
+        // Fonction pour copier le texte
+        document.querySelectorAll('.copy-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const codeBlock = this.nextElementSibling.querySelector('code');
+                const text = codeBlock.innerText;
+                
+                navigator.clipboard.writeText(text).then(() => {
+                    // Changer temporairement le texte du bouton pour indiquer la copie
+                    const originalText = this.innerText;
+                    this.innerText = 'Copié !';
+                    this.style.backgroundColor = '#4CAF50';
+                    
+                    // Rétablir le texte original après 2 secondes
+                    setTimeout(() => {
+                        this.innerText = originalText;
+                        this.style.backgroundColor = '#0db7ed';
+                    }, 2000);
+                }).catch(err => {
+                    console.error('Erreur lors de la copie:', err);
+                    this.innerText = 'Erreur !';
+                    this.style.backgroundColor = '#f44336';
+                    
+                    setTimeout(() => {
+                        this.innerText = 'Copier';
+                        this.style.backgroundColor = '#0db7ed';
+                    }, 2000);
+                });
+            });
+        });
+    </script>
 </body>
 </html>
